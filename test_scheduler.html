@@ -1,0 +1,175 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Scheduler | NYU Scheduler</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+    <link href="css/bootstrap-combobox.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><img src="img/nav-brand.png" alt="NYU Scheduler" title="NYU Scheduler"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"><span class="hide-desktop">  Profile</span></span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-list" aria-hidden="true"><span class="hide-desktop">  Settings</span></span></a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-envelope" aria-hidden="true"><span class="hide-desktop">  Contact</span></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+         <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav nav-sidebar">
+              <li class="active"><a href="#">Options</a></li>
+              <li><a href="javascript:addCourses()">
+                Add to Cart
+              </a></li>
+              <li><a href="javascript:removeCourses()">Remove from Cart</a></li>
+              <li><a href="javascript:alert('Generator not available at this time')" data-toggle="#schedule">Generate Schedule</a></li>
+            </ul>
+        </div><!--/span-->
+        <div class="col-sm-9 col-md-10 main">
+          <!--toggle sidebar button-->
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+          </p>
+          
+          <h1 class="page-header">NYU Scheduler</h1>
+
+          <ul class="nav nav-tabs" id="#myTabs">
+            <li class="active"><a href="#courses" data-toggle="tab">Search</a></li>
+            <li><a href="#cart" data-toggle="tab" onclick="javascript:showCart()">Cart</a></li>
+            <li><a href="#schedule" data-toggle="tab">Schedule</a></li>
+          </ul>
+
+          <div class="tab-content">
+          <div class="tab-pane active" id="courses">
+              <h3 class="sub-header">Search Courses</h3>
+              <div id="output"></div>
+              <select id="collegesList" class="combobox form-control" name="inline">
+                <option value="" selected="selected">Select a college</option>
+              </select><br>
+              <select id="deptList" class="combobox form-control" name="inline">
+                <option value="" selected="selected">Select a department</option>
+              </select>
+              <hr>
+              <div class="btn-group dropup pull-right">
+                <button type="button" class="btn btn-default">Toggle Columns</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li onclick="hidefunction('coursesTable', 1)" style="text-align:center;">Name</li>
+                  <li onclick="hidefunction('coursesTable', 2)">Course</li>
+                  <li onclick="hidefunction('coursesTable', 3)">Instructor(s)</li>
+                  <li onclick="hidefunction('coursesTable', 4)">Days</li>
+                  <li onclick="hidefunction('coursesTable', 5)">Time</li>
+                  <li onclick="hidefunction('coursesTable', 6)">Add</li>
+                </ul>
+              </div><br><br>
+              <div class="table-responsive">
+              <table class="table table-striped" id="coursesTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Instructor(s)</th>
+                    <th>Days</th>
+                    <th>Time</th>
+                    <th>Add</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              </div>
+          </div><!-- @end #courses -->
+
+          <div class="tab-pane" id="cart">
+            <h3 class="sub-header">View Cart</h3>
+            <div id="outputCart"></div>
+              <div class="btn-group dropup pull-right">
+                <button type="button" class="btn btn-default">Toggle Columns</button>
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Columns</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li onclick="hidefunction('cartTable', 1)">Name</li>
+                  <li onclick="hidefunction('cartTable', 2)">Course</li>
+                  <li onclick="hidefunction('cartTable', 3)">Instructor(s)</li>
+                  <li onclick="hidefunction('cartTable', 4)">Days</li>
+                  <li onclick="hidefunction('cartTable', 5)">Time</li>
+                  <li onclick="hidefunction('cartTable', 6)">Remove</li>
+                </ul>
+              </div><br><br>
+            <div class="table-responsive">
+              <table class="table table-striped" id="cartTable">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Instructor(s)</th>
+                    <th>Days</th>
+                    <th>Time</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              </div>
+          </div><!-- @end #empty -->
+
+          <div class="tab-pane" id="schedule">
+            <h3 class="sub-header">View Schedule</h3>
+              <div id="calendar"></div>
+          </div><!-- @end #schedule -->
+
+          </div>
+
+        </div><!--/row-->
+      </div>
+    </div><!--/.container-->
+    <footer>
+      <p class="pull-right">NYU Stern | INFO-UB 22 | Fall 2014</p>
+    </footer>
+            
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-combobox.js" type="text/javascript"></script>
+    <script src="js/main.js"></script>
+    <script src='fullcalendar/lib/moment.min.js'></script>
+    <script src='fullcalendar/fullcalendar.js'></script>
+  </body>
+</html>
