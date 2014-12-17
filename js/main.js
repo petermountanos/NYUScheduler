@@ -207,4 +207,3 @@ function hidefunction(t, col) {
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $('#calendar').fullCalendar('render');
     });
-});
